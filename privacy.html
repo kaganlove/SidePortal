@@ -111,7 +111,7 @@
 
         <h2>Contact</h2>
         <p>
-          For support or privacy questions, contact: <a href="mailto:REPLACE_WITH_SUPPORT_EMAIL" id="supportEmail">REPLACE_WITH_SUPPORT_EMAIL</a>
+          For support or privacy questions, contact: <a href="mailto:SidePortal.queries@gmail.com" id="supportEmail">SidePortal.queries@gmail.com</a>
         </p>
 
         <p class="fine">
@@ -126,12 +126,6 @@
       const now = new Date();
       document.getElementById("y").textContent = now.getFullYear();
       document.getElementById("d").textContent = now.toLocaleDateString();
-      const SUPPORT_EMAIL = "REPLACE_WITH_SUPPORT_EMAIL";
-      const supportEl = document.getElementById("supportEmail");
-      if (SUPPORT_EMAIL && SUPPORT_EMAIL.includes("@")) {
-        supportEl.textContent = SUPPORT_EMAIL;
-        supportEl.href = "mailto:" + SUPPORT_EMAIL;
-      }
     </script>
   </body>
 </html>
