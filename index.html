@@ -67,25 +67,24 @@
         gap: 14px;
       }
 
-.logo {
-  width: 92px;
-  height: 92px;
-  border-radius: 0;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  display: block;
-  overflow: visible;
-  margin-top: 0;
-}
+      .logo {
+        width: 92px;
+        height: 92px;
+        border-radius: 0;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        display: block;
+        overflow: visible;
+        margin-top: 0;
+      }
 
-.logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
+      .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
 
       h1 {
         margin: 0;
@@ -130,6 +129,15 @@
         background: rgba(255, 255, 255, 0.06);
       }
       .btnGhost:hover { background: rgba(255, 255, 255, 0.085); }
+
+      /* NEW: red primary button style (applied to "Get the extension") */
+      .btnRed {
+        border: 1px solid rgba(255, 43, 69, 0.55);
+        background: rgba(255, 43, 69, 0.14);
+      }
+      .btnRed:hover {
+        background: rgba(255, 43, 69, 0.20);
+      }
 
       .pill {
         display: inline-flex;
@@ -252,6 +260,17 @@
         color: rgba(255,255,255,0.86);
       }
       .badgeRed .dot { background: var(--red); box-shadow: 0 0 0 4px rgba(255,43,69,0.12); }
+
+      /* NEW: make Minimal data pill match Built for speed pill (same styling) */
+      .badgeRed {
+        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.05);
+        color: var(--muted);
+      }
+      .badgeRed .dot {
+        background: var(--red);
+        box-shadow: 0 0 0 4px rgba(255,43,69,0.12);
+      }
     </style>
   </head>
 
@@ -271,9 +290,11 @@
         </div>
 
         <div class="ctaRow">
-          <a class="btn" href="#" id="storeLink" rel="noreferrer">Get the extension</a>
+          <!-- CHANGED: apply red styling to Get the extension button -->
+          <a class="btn btnRed" href="#" id="storeLink" rel="noreferrer">Get the extension</a>
           <a class="btn btnGhost" href="privacy.html">Privacy</a>
           <span class="pill"><span class="dot"></span> Built for speed</span>
+          <!-- remains badgeRed, but now badgeRed matches pill styling -->
           <span class="pill badgeRed"><span class="dot"></span> Minimal data</span>
         </div>
       </div>
