@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SidePortal</title>
+    <meta name="description" content="SidePortal puts Gmail, Drive, Calendar, and organization quick links in Chrome’s side panel." />
+    <style>
+      body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b1020; color:#fff; }
+      .wrap { max-width: 920px; margin: 0 auto; padding: 56px 20px; }
+      .card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; padding: 22px; }
+      h1 { font-size: 44px; margin: 0 0 10px; letter-spacing: .2px; }
+      p { color: rgba(255,255,255,.82); line-height: 1.6; font-size: 16px; }
+      .grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 18px; }
+      @media (min-width: 820px){ .grid { grid-template-columns: 1fr 1fr; } }
+      a.btn { display:inline-block; padding: 12px 14px; border-radius: 12px; background: rgba(90,140,255,0.25); border: 1px solid rgba(90,140,255,0.55); color:#fff; text-decoration:none; }
+      a.btn:hover { background: rgba(90,140,255,0.33); }
+      .muted { font-size: 13px; color: rgba(255,255,255,.62); margin-top: 10px; }
+      ul { margin: 10px 0 0 18px; color: rgba(255,255,255,.82); line-height: 1.6; }
+      code { background: rgba(255,255,255,.08); padding: 2px 6px; border-radius: 8px; }
+      .top { display:flex; align-items:center; justify-content:space-between; gap: 12px; flex-wrap: wrap; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <h1>SidePortal</h1>
+        <a class="btn" href="[CHROME_WEB_STORE_LINK_AFTER_PUBLISH]" target="_blank" rel="noreferrer">Get the extension</a>
+      </div>
+
+      <p>
+        SidePortal keeps your day moving by putting Gmail, Drive search, Calendar events, and organization quick links
+        directly in Chrome’s side panel. No extra tabs. No hunting.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h2 style="margin:0 0 8px;font-size:20px;">What it does</h2>
+          <ul>
+            <li>Open Gmail and see unread status at a glance</li>
+            <li>Search Google Drive from the side panel</li>
+            <li>View upcoming Calendar events</li>
+            <li>Save personal quick links</li>
+            <li>Join or create Organization Quick Links using a share code</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2 style="margin:0 0 8px;font-size:20px;">Support</h2>
+          <p style="margin:0 0 10px;">
+            Need help or want to request a feature?
+          </p>
+          <p style="margin:0;">
+            Email: <a href="mailto:[YOUR_SUPPORT_EMAIL]" style="color:#fff;">[YOUR_SUPPORT_EMAIL]</a><br/>
+            Or open an issue: <a href="[GITHUB_ISSUES_LINK]" style="color:#fff;">GitHub Issues</a>
+          </p>
+          <p class="muted">Privacy note: SidePortal uses Google APIs only to show your info in the panel.</p>
+        </div>
+      </div>
+
+      <p class="muted">
+        © <span id="y"></span> SidePortal
+      </p>
+    </div>
+
+    <script>
+      document.getElementById("y").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
