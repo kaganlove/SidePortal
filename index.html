@@ -4,67 +4,360 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>SidePortal</title>
-    <meta name="description" content="SidePortal puts Gmail, Drive, Calendar, and organization quick links in Chrome’s side panel." />
+    <meta
+      name="description"
+      content="SidePortal puts Gmail, Drive search, Calendar events, and organization quick links in Chrome’s side panel."
+    />
+
+    <meta property="og:title" content="SidePortal" />
+    <meta
+      property="og:description"
+      content="Gmail, Drive search, Calendar, and org quick links in Chrome’s side panel."
+    />
+    <meta property="og:type" content="website" />
+
     <style>
-      body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b1020; color:#fff; }
-      .wrap { max-width: 920px; margin: 0 auto; padding: 56px 20px; }
-      .card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; padding: 22px; }
-      h1 { font-size: 44px; margin: 0 0 10px; letter-spacing: .2px; }
-      p { color: rgba(255,255,255,.82); line-height: 1.6; font-size: 16px; }
-      .grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 18px; }
-      @media (min-width: 820px){ .grid { grid-template-columns: 1fr 1fr; } }
-      a.btn { display:inline-block; padding: 12px 14px; border-radius: 12px; background: rgba(90,140,255,0.25); border: 1px solid rgba(90,140,255,0.55); color:#fff; text-decoration:none; }
-      a.btn:hover { background: rgba(90,140,255,0.33); }
-      .muted { font-size: 13px; color: rgba(255,255,255,.62); margin-top: 10px; }
-      ul { margin: 10px 0 0 18px; color: rgba(255,255,255,.82); line-height: 1.6; }
-      code { background: rgba(255,255,255,.08); padding: 2px 6px; border-radius: 8px; }
-      .top { display:flex; align-items:center; justify-content:space-between; gap: 12px; flex-wrap: wrap; }
+      :root {
+        --bg0: #070b18;
+        --bg1: #0a1024;
+        --card: rgba(255, 255, 255, 0.06);
+        --card2: rgba(255, 255, 255, 0.045);
+        --border: rgba(255, 255, 255, 0.12);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.72);
+        --muted2: rgba(255, 255, 255, 0.58);
+        --blue: #2b6cff;
+        --blue2: #4aa3ff;
+        --red: #ff2b45;
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+        --radius: 18px;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(900px 420px at 18% 12%, rgba(43, 108, 255, 0.22), transparent 60%),
+          radial-gradient(900px 420px at 78% 18%, rgba(255, 43, 69, 0.16), transparent 60%),
+          radial-gradient(900px 540px at 50% 85%, rgba(74, 163, 255, 0.12), transparent 60%),
+          linear-gradient(180deg, var(--bg0), var(--bg1));
+      }
+
+      a { color: inherit; }
+      .wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 56px 20px 44px;
+      }
+
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .logo {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--border);
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      }
+      .logo img { width: 100%; height: 100%; object-fit: cover; }
+
+      h1 {
+        margin: 0;
+        font-size: 44px;
+        letter-spacing: 0.2px;
+        line-height: 1.05;
+      }
+
+      .tagline {
+        margin: 12px 0 0;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.6;
+        max-width: 78ch;
+      }
+
+      .ctaRow {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        text-decoration: none;
+        border: 1px solid rgba(43, 108, 255, 0.55);
+        background: rgba(43, 108, 255, 0.18);
+        box-shadow: 0 10px 26px rgba(0,0,0,0.3);
+        transition: transform 120ms ease, background 120ms ease;
+        font-weight: 650;
+        letter-spacing: 0.2px;
+      }
+      .btn:hover { transform: translateY(-1px); background: rgba(43, 108, 255, 0.24); }
+
+      .btnGhost {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .btnGhost:hover { background: rgba(255, 255, 255, 0.085); }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: var(--muted);
+        padding: 8px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.05);
+      }
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        background: var(--blue2);
+        box-shadow: 0 0 0 4px rgba(74,163,255,0.15);
+      }
+
+      .heroGrid {
+        margin-top: 26px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      @media (min-width: 920px) {
+        .heroGrid { grid-template-columns: 1.15fr 0.85fr; }
+      }
+
+      .card {
+        background: linear-gradient(180deg, var(--card), var(--card2));
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 18px 18px;
+        box-shadow: var(--shadow);
+      }
+
+      .card h2 {
+        margin: 0 0 10px;
+        font-size: 18px;
+        letter-spacing: 0.2px;
+      }
+
+      .list {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .miniGrid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      @media (min-width: 920px) {
+        .miniGrid { grid-template-columns: 1fr; }
+      }
+
+      .kvs {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 12px;
+      }
+      .kv {
+        padding: 12px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(255,255,255,0.05);
+        color: var(--muted);
+        line-height: 1.55;
+        font-size: 14px;
+      }
+      .kv strong { color: var(--text); }
+
+      .section {
+        margin-top: 16px;
+      }
+
+      .hr {
+        height: 1px;
+        background: rgba(255,255,255,0.10);
+        margin: 18px 0;
+      }
+
+      .fine {
+        color: var(--muted2);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .footer {
+        margin-top: 18px;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        color: var(--muted2);
+        font-size: 13px;
+      }
+
+      .linkRow {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .linkRow a {
+        color: var(--muted);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,0.18);
+      }
+      .linkRow a:hover { color: var(--text); }
+
+      .badgeRed {
+        border-color: rgba(255,43,69,0.45);
+        background: rgba(255,43,69,0.08);
+        color: rgba(255,255,255,0.86);
+      }
+      .badgeRed .dot { background: var(--red); box-shadow: 0 0 0 4px rgba(255,43,69,0.12); }
     </style>
   </head>
+
   <body>
     <div class="wrap">
       <div class="top">
-        <h1>SidePortal</h1>
-        <a class="btn" href="[CHROME_WEB_STORE_LINK_AFTER_PUBLISH]" target="_blank" rel="noreferrer">Get the extension</a>
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <img src="assets/sideportal-logo.png" alt="SidePortal logo" />
+          </div>
+          <div>
+            <h1>SidePortal</h1>
+            <div class="tagline">
+              SidePortal keeps your day moving by putting Gmail, Drive search, Calendar events, and organization quick links directly in Chrome’s side panel. No extra tabs. No hunting.
+            </div>
+          </div>
+        </div>
+
+        <div class="ctaRow">
+          <a class="btn" href="#" id="storeLink" rel="noreferrer">Get the extension</a>
+          <a class="btn btnGhost" href="privacy.html">Privacy</a>
+          <span class="pill"><span class="dot"></span> Built for speed</span>
+          <span class="pill badgeRed"><span class="dot"></span> Minimal data</span>
+        </div>
       </div>
 
-      <p>
-        SidePortal keeps your day moving by putting Gmail, Drive search, Calendar events, and organization quick links
-        directly in Chrome’s side panel. No extra tabs. No hunting.
-      </p>
-
-      <div class="grid">
+      <div class="heroGrid">
         <div class="card">
-          <h2 style="margin:0 0 8px;font-size:20px;">What it does</h2>
-          <ul>
+          <h2>What it does</h2>
+          <ul class="list">
             <li>Open Gmail and see unread status at a glance</li>
             <li>Search Google Drive from the side panel</li>
             <li>View upcoming Calendar events</li>
-            <li>Save personal quick links</li>
-            <li>Join or create Organization Quick Links using a share code</li>
+            <li>Save personal quick links on your device</li>
+            <li>Join or create Organization Quick Links with a share code</li>
           </ul>
+
+          <div class="section">
+            <div class="hr"></div>
+            <h2>How it works</h2>
+            <div class="kvs">
+              <div class="kv"><strong>Google sign in</strong> uses Chrome Identity and Google OAuth, so the extension can request your Gmail and Calendar data only after you approve access.</div>
+              <div class="kv"><strong>Quick links</strong> are either stored locally (personal) or shared through your organization group (Supabase database).</div>
+              <div class="kv"><strong>Side panel workflow</strong> keeps you in one place while you check what matters and jump to the right page when needed.</div>
+            </div>
+          </div>
         </div>
 
-        <div class="card">
-          <h2 style="margin:0 0 8px;font-size:20px;">Support</h2>
-          <p style="margin:0 0 10px;">
-            Need help or want to request a feature?
-          </p>
-          <p style="margin:0;">
-            Email: <a href="mailto:[YOUR_SUPPORT_EMAIL]" style="color:#fff;">[YOUR_SUPPORT_EMAIL]</a><br/>
-            Or open an issue: <a href="[GITHUB_ISSUES_LINK]" style="color:#fff;">GitHub Issues</a>
-          </p>
-          <p class="muted">Privacy note: SidePortal uses Google APIs only to show your info in the panel.</p>
+        <div class="miniGrid">
+          <div class="card">
+            <h2>Security and privacy highlights</h2>
+            <div class="kvs">
+              <div class="kv"><strong>No selling of data.</strong> SidePortal does not sell personal information.</div>
+              <div class="kv"><strong>Least access.</strong> Only requests the Google scopes needed for the features you use.</div>
+              <div class="kv"><strong>Local first.</strong> Personal links are stored in Chrome storage on your device.</div>
+              <div class="kv"><strong>Clear controls.</strong> You can disconnect by logging out, and you can remove the extension at any time.</div>
+            </div>
+
+            <div class="hr"></div>
+
+            <div class="fine">
+              SidePortal uses Google APIs to display Gmail unread status, upcoming Calendar events, and Drive search shortcuts. Organization Quick Links are stored in a Supabase database to support group sharing by code.
+              For full details, read the <a href="privacy.html">Privacy Policy</a>.
+            </div>
+
+            <div class="hr"></div>
+
+            <div class="fine">
+              Support: <a href="mailto:REPLACE_WITH_SUPPORT_EMAIL" id="supportEmail">REPLACE_WITH_SUPPORT_EMAIL</a><br />
+              Issues: <a href="REPLACE_WITH_GITHUB_ISSUES" id="issuesLink">REPLACE_WITH_GITHUB_ISSUES</a>
+            </div>
+          </div>
         </div>
       </div>
 
-      <p class="muted">
-        © <span id="y"></span> SidePortal
-      </p>
+      <div class="footer">
+        <div>© <span id="y"></span> SidePortal</div>
+        <div class="linkRow">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="#" id="storeLink2">Chrome Web Store</a>
+        </div>
+      </div>
     </div>
 
     <script>
       document.getElementById("y").textContent = new Date().getFullYear();
+
+      // Replace these three values before publishing
+      const CHROME_WEB_STORE_URL = "REPLACE_WITH_STORE_URL";
+      const SUPPORT_EMAIL = "REPLACE_WITH_SUPPORT_EMAIL";
+      const GITHUB_ISSUES_URL = "REPLACE_WITH_GITHUB_ISSUES";
+
+      const storeLink = document.getElementById("storeLink");
+      const storeLink2 = document.getElementById("storeLink2");
+      if (CHROME_WEB_STORE_URL && CHROME_WEB_STORE_URL.startsWith("http")) {
+        storeLink.href = CHROME_WEB_STORE_URL;
+        storeLink2.href = CHROME_WEB_STORE_URL;
+      } else {
+        storeLink.href = "#";
+        storeLink2.href = "#";
+      }
+
+      const supportEl = document.getElementById("supportEmail");
+      if (SUPPORT_EMAIL && SUPPORT_EMAIL.includes("@")) {
+        supportEl.textContent = SUPPORT_EMAIL;
+        supportEl.href = "mailto:" + SUPPORT_EMAIL;
+      }
+
+      const issuesEl = document.getElementById("issuesLink");
+      if (GITHUB_ISSUES_URL && GITHUB_ISSUES_URL.startsWith("http")) {
+        issuesEl.href = GITHUB_ISSUES_URL;
+        issuesEl.textContent = "GitHub Issues";
+      }
     </script>
   </body>
 </html>
