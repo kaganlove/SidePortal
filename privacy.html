@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SidePortal Privacy Policy</title>
+    <style>
+      :root {
+        --bg0: #070b18;
+        --bg1: #0a1024;
+        --card: rgba(255, 255, 255, 0.06);
+        --border: rgba(255, 255, 255, 0.12);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.74);
+        --muted2: rgba(255, 255, 255, 0.58);
+        --radius: 18px;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(900px 420px at 18% 12%, rgba(43, 108, 255, 0.18), transparent 60%),
+          radial-gradient(900px 420px at 78% 18%, rgba(255, 43, 69, 0.12), transparent 60%),
+          linear-gradient(180deg, var(--bg0), var(--bg1));
+      }
+      .wrap { max-width: 960px; margin: 0 auto; padding: 46px 20px 48px; }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 22px;
+      }
+      h1 { margin: 0 0 10px; font-size: 34px; }
+      h2 { margin: 18px 0 8px; font-size: 18px; }
+      p, li { color: var(--muted); line-height: 1.7; }
+      .fine { color: var(--muted2); font-size: 13px; line-height: 1.6; margin-top: 14px; }
+      a { color: var(--text); }
+      .top { display:flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; }
+      .btn {
+        display:inline-block;
+        padding: 10px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.14);
+        background: rgba(255,255,255,0.06);
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <h1>SidePortal Privacy Policy</h1>
+        <a class="btn" href="index.html">Back to site</a>
+      </div>
+
+      <div class="card">
+        <p><strong>Effective date:</strong> <span id="d"></span></p>
+
+        <h2>Summary</h2>
+        <p>
+          SidePortal is a Chrome extension that helps you access Google tools and quick links from the Chrome side panel.
+          This policy explains what data is accessed, what data is stored, and what you can control.
+        </p>
+
+        <h2>Data we access</h2>
+        <ul>
+          <li><strong>Gmail:</strong> Used to show unread status and open Gmail quickly.</li>
+          <li><strong>Google Calendar:</strong> Used to display upcoming events in the panel.</li>
+          <li><strong>Google Drive:</strong> Used to open Drive search shortcuts based on your query.</li>
+        </ul>
+
+        <h2>Data we store</h2>
+        <ul>
+          <li><strong>Personal quick links:</strong> Stored in Chrome storage on your device.</li>
+          <li><strong>Organization group membership:</strong> A group code and membership record may be stored to load shared links.</li>
+          <li><strong>Shared org links:</strong> Stored in a Supabase database to allow teammates to use the same link set.</li>
+        </ul>
+
+        <h2>Data we do not sell</h2>
+        <p>
+          SidePortal does not sell personal data. SidePortal does not run ads and does not share your data with advertisers.
+        </p>
+
+        <h2>Authentication and tokens</h2>
+        <p>
+          SidePortal uses Google OAuth via Chrome Identity. Access tokens are used to call Google APIs.
+          Tokens are handled by Chrome and are not intentionally logged or sold.
+        </p>
+
+        <h2>Permissions</h2>
+        <p>
+          SidePortal requests permissions needed to support the features shown in the side panel.
+          If you do not connect Google, Google API calls will not run.
+        </p>
+
+        <h2>Your controls</h2>
+        <ul>
+          <li>You can log out in the panel to clear cached tokens.</li>
+          <li>You can remove the extension at any time from Chrome Extensions.</li>
+          <li>You can remove your personal links by clearing extension storage.</li>
+        </ul>
+
+        <h2>Security measures</h2>
+        <ul>
+          <li>Uses HTTPS when communicating with Google APIs and Supabase.</li>
+          <li>Aims for least access by requesting only the scopes required for the features.</li>
+          <li>Stores personal links locally rather than sending them to a server.</li>
+        </ul>
+
+        <h2>Contact</h2>
+        <p>
+          For support or privacy questions, contact: <a href="mailto:REPLACE_WITH_SUPPORT_EMAIL" id="supportEmail">REPLACE_WITH_SUPPORT_EMAIL</a>
+        </p>
+
+        <p class="fine">
+          Note: If your organization requires additional compliance language, you can extend this policy without changing the extension behavior.
+        </p>
+      </div>
+
+      <p class="fine">© <span id="y"></span> SidePortal</p>
+    </div>
+
+    <script>
+      const now = new Date();
+      document.getElementById("y").textContent = now.getFullYear();
+      document.getElementById("d").textContent = now.toLocaleDateString();
+      const SUPPORT_EMAIL = "REPLACE_WITH_SUPPORT_EMAIL";
+      const supportEl = document.getElementById("supportEmail");
+      if (SUPPORT_EMAIL && SUPPORT_EMAIL.includes("@")) {
+        supportEl.textContent = SUPPORT_EMAIL;
+        supportEl.href = "mailto:" + SUPPORT_EMAIL;
+      }
+    </script>
+  </body>
+</html>
