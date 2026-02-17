@@ -253,7 +253,7 @@
       <div class="top">
         <div class="brand">
           <div class="logo" aria-hidden="true">
-            <img src="assets/sideportal-logo.png" alt="SidePortal logo" />
+            <img src="./assets/sideportal-logo.png" alt="SidePortal logo" />
           </div>
           <div>
             <h1>SidePortal</h1>
@@ -313,8 +313,7 @@
             <div class="hr"></div>
 
             <div class="fine">
-              Support: <a href="mailto:REPLACE_WITH_SUPPORT_EMAIL" id="supportEmail">REPLACE_WITH_SUPPORT_EMAIL</a><br />
-              Issues: <a href="REPLACE_WITH_GITHUB_ISSUES" id="issuesLink">REPLACE_WITH_GITHUB_ISSUES</a>
+              Support: <a href="mailto:SidePortal.queries@gmail.com" id="supportEmail">SidePortal.queries@gmail.com</a>
             </div>
           </div>
         </div>
@@ -332,10 +331,8 @@
     <script>
       document.getElementById("y").textContent = new Date().getFullYear();
 
-      // Replace these three values before publishing
+      // Replace this value before publishing
       const CHROME_WEB_STORE_URL = "REPLACE_WITH_STORE_URL";
-      const SUPPORT_EMAIL = "REPLACE_WITH_SUPPORT_EMAIL";
-      const GITHUB_ISSUES_URL = "REPLACE_WITH_GITHUB_ISSUES";
 
       const storeLink = document.getElementById("storeLink");
       const storeLink2 = document.getElementById("storeLink2");
@@ -345,18 +342,6 @@
       } else {
         storeLink.href = "#";
         storeLink2.href = "#";
-      }
-
-      const supportEl = document.getElementById("supportEmail");
-      if (SUPPORT_EMAIL && SUPPORT_EMAIL.includes("@")) {
-        supportEl.textContent = SUPPORT_EMAIL;
-        supportEl.href = "mailto:" + SUPPORT_EMAIL;
-      }
-
-      const issuesEl = document.getElementById("issuesLink");
-      if (GITHUB_ISSUES_URL && GITHUB_ISSUES_URL.startsWith("http")) {
-        issuesEl.href = GITHUB_ISSUES_URL;
-        issuesEl.textContent = "GitHub Issues";
       }
     </script>
   </body>
