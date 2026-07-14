@@ -7,7 +7,8 @@
     "alarms",
     "identity",
     "storage",
-    "tabs"
+    "tabs",
+    "sidePanel"
   ],
   "host_permissions": [
     "https://www.googleapis.com/*"
