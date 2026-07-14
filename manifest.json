@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "TSTC Sidebar",
+  "version": "0.1.0",
+  "description": "TSTC helper sidebar: group bookmarks, my links, calendar preview, Drive search, and simple email/chat notifications.",
+  "permissions": [
+    "alarms",
+    "identity",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://www.googleapis.com/*"
+  ],
+  "oauth2": {
+    "client_id": "947831223849-erqc2tro7uvthdeck3b2e89rjfne4vjv.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar.readonly",
+      "https://www.googleapis.com/auth/drive.readonly",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "openid"
+    ]
+  },
+  "action": {
+    "default_title": "TSTC Sidebar",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  }
+}
