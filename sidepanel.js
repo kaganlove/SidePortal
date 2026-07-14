@@ -4,6 +4,7 @@ const STORAGE_KEYS = {
   myLinks: "myLinks",
   joinedOrg: "joinedOrg",
   offlineOrgs: "offlineOrgs",
+  createdOrgs: "createdOrgs",
 };
 
 function $(id) {
@@ -505,7 +506,17 @@ async function updateOrgUI(org) {
     if (createOrgBtn) createOrgBtn.classList.add("hidden");
     if (joinOrgBtn) joinOrgBtn.classList.add("hidden");
     if (leaveOrgBtn) leaveOrgBtn.classList.remove("hidden");
-    if (addOrgLinkBtn) addOrgLinkBtn.classList.remove("hidden");
+
+    // Only show the "Add Link" button if the user created this organization
+    const { createdOrgs } = await getSync([STORAGE_KEYS.createdOrgs]);
+    const createdArr = Array.isArray(createdOrgs) ? createdOrgs : [];
+    const isCreator = createdArr.includes(org.id);
+
+    if (isCreator) {
+      if (addOrgLinkBtn) addOrgLinkBtn.classList.remove("hidden");
+    } else {
+      if (addOrgLinkBtn) addOrgLinkBtn.classList.add("hidden");
+    }
 
     setStatus("Loading organization links...");
     const links = await getOrgLinks(org.id, org.code);
@@ -571,7 +582,15 @@ async function createGroup() {
   const code = generateOrgCode();
   const org = await createOrganization(name, code);
 
-  await setSync({ [STORAGE_KEYS.joinedOrg]: org });
+  // Save this org to the user's created organizations list
+  const { createdOrgs } = await getSync([STORAGE_KEYS.createdOrgs]);
+  const createdArr = Array.isArray(createdOrgs) ? createdOrgs : [];
+  createdArr.push(org.id);
+  await setSync({
+    [STORAGE_KEYS.joinedOrg]: org,
+    [STORAGE_KEYS.createdOrgs]: createdArr
+  });
+
   await updateOrgUI(org);
 
   if (org.isOffline) {
